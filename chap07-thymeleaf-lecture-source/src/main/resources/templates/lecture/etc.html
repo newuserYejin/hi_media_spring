@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>기타 문법 정리</h1>
+
+    <h3>th:with = 지역변수 지정해서 사용 가능</h3>
+
+    <th:block th:with="start = ${searchCriteria.startPage}, last = ${searchCriteria.endPage}">
+        <!-- #numbers : Utility Object
+               타임리프 문서 내부에서 사용할 수 있는 객체
+               그 중 sequence(a, b) 전달인자 a부터 b까지 반복
+               (5,10) => 5, 6, 7, 8, 9, 10
+         -->
+        <th:block th:each="p : ${#numbers.sequence(start,last)}">
+            <th:block th:if="${searchCriteria.currentPage eq p}">
+                <button th:text="${p}" disabled></button>
+            </th:block>
+
+            <th:block th:if="${searchCriteria.currentPage ne p}">
+                <button th:text="${p}"></button>
+            </th:block>
+        </th:block>
+    </th:block>
+
+    <h3>SpringEL</h3>
+
+    <pre>
+        변수 표현식 ${}은 SpringEL 에서 제공하는 표현식을 쓸 수 있다.
+    </pre>
+
+    <p>List 타입 객체</p>
+
+    <ul>
+        <li th:text="${memberList[1].name}"></li>
+        <li th:text="${memberList[1]['age']}"></li>
+        <li th:text="${memberList[1].getGender()}"></li>
+        <li th:text="${memberList.get(1).getGender()}"></li>
+        <li th:text="${memberList.get(1).address}"></li>
+    </ul>
+
+    <p>Map 타입 객체</p>
+
+    <ul>
+        <li th:text="${memberMap['1'].name}"></li>
+        <li th:text="${memberMap['3']['age']}"></li>
+        <li th:text="${memberMap['3'].getGender()}"></li                                                                                                                                                                                                 >
+    </ul>
+
+    <h3>Spring Security 를 사용한 인증 여부 확인</h3>
+    <p> 타임리프 문법에서 시큐리티 적용 시 로그인과 로그아웃에 대한 이벤트를 사용할 수 있다. </p>
+
+<!--    <th:block sec:authorize="isAuthenticated()">로그인 했음</th:block>-->
+<!--    <th:block sec:authorize="isAuthenticated() == false">로그인 하지 않음</th:block>-->
+
+</body>
+</html>
