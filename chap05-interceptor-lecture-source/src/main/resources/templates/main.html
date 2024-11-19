@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Interceptor 를 이용하여 Controller 의 요청 가로채기</h1>
+    <pre>
+        인터셉터 : 스프링 프레임워크에서 제공하는 기능 중 하나
+        클라이언트가 보내는 요청 가로채서 처리하는 역할
+
+        Filter 와 비슷하지만 Filter 는 Servlet 이 주체, Interceptor 는 Spring 이 주체다.
+
+        Interceptor 는 IoC Container 에 등록되어 있는 Bean 을 참조할 수 있다는 것이 특징이다.
+    </pre>
+
+    <h3>핸드러 인터셉트를 이용한 요청 확인 처리</h3>
+
+    <button onclick="location.href='stopwatch'">수행 시간 확인</button>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>@RequestParam 이용한 파라미터 꺼내기</h1>
+    <form action="modify" method="post">
+        <label for="name">수정할 메뉴 이름 : </label>
+        <input type="text" name="modifyName" id="name">
+
+        <br>
+
+        <label for="price">수정할 메뉴 가격 : </label>
+        <input type="number" name="modifyPrice" id="price" step="1000" min="0">
+
+        <br>
+
+        <button type="submit">수정</button>
+    </form>
+
+    <h1>modify all</h1>
+    <form action="modifyAll" method="post">
+        <label for="modifyName2">수정할 메뉴 이름 : </label>
+        <input type="text" name="modifyName2" id="modifyName2">
+
+        <br>
+
+        <label for="modifyPrice2">수정할 메뉴 가격 : </label>
+        <input type="number" name="modifyPrice2" id="modifyPrice2" step="1000" min="0">
+
+        <br>
+
+        <button type="submit">수정</button>
+    </form>
+
+</body>
+</html>
