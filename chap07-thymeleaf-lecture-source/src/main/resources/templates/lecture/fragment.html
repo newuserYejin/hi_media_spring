@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .header{
+            color: red;
+        }
+
+        .footer{
+            color: blue;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- th:replace 는 해당 영역에 다른 곳에 작성해둔 fragment 를 불러오는 방식이다. -->
+    <!-- 기존에 header 에 작성한 내용은 불러오는 내용에 의해 덮어진다. -->
+
+    <header th:replace="~{/common/header::headerFragment}">
+        <h1>Header 영역</h1>
+    </header>
+
+    <aside th:replace="~{/common/aside::asideFragment(${test}, ${test2})}"></aside>
+
+    <main>
+        <article>
+            <section>
+                <h1>메인 내용 작성 영역</h1>
+            </section>
+        </article>
+    </main>
+
+    <!--
+        th:insert 문법은 삽입하고자 하는 Fragment 를 삽입하는 문법으로
+        블록 내에 정의되어 있는 내용에 불러온 내용을 삽입한다.
+
+        replace 와의 차이정 : 기존의 내용을 삭제하는 것이 아니라 추가되는 것이다.
+
+        단 불러오는 블럭을 기준으로 내용은 초기화 된다.
+
+         th:insert="~{/common/footer::footerFragment}" 가 div 에 들어가면
+         h2 태그가 사라진다.
+    -->
+
+    <div>
+        <footer th:insert="~{/common/footer::footerFragment}"></footer>
+        <h2>Footer 영역</h2>
+    </div>
+</body>
+</html>

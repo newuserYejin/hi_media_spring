@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<!-- parameter1, parameter2 : 이걸 부르는 쪽에서 넘겨주는 값을 받기-->
+    <aside th:fragment="asideFragment(parameter1, parameter2)" class="aside">
+        <ul>
+            <li th:text="${parameter1}"></li>
+            <li th:text="${parameter2}"></li>
+        </ul>
+    </aside>
+
+</body>
+</html>
