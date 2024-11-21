@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohgiraffers.crud.menu.model.dao.MenuMapper">
+    <resultMap id="menuResultMap" type="com.ohgiraffers.crud.menu.model.dto.MenuDTO">
+        <id property="code" column="MENU_CODE"/>
+        <result property="name" column="MENU_NAME"/>
+        <result property="price" column="MENU_PRICE"/>
+        <result property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="orderableStastus" column="ORDERABLE_STATUS"/>
+    </resultMap>
+
+    <resultMap id="CategoryResultMap" type="com.ohgiraffers.crud.menu.model.dto.CategoryDTO">
+        <id property="code" column="CATEGORY_CODE"/>
+        <result property="name" column="CATEGORY_NAME"/>
+        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
+    </resultMap>
+
+    <select id="findAllMenus" resultMap="menuResultMap">
+        select MENU_CODE,
+                MENU_NAME,
+                MENU_PRICE,
+                CATEGORY_CODE,
+                ORDERABLE_STATUS
+        from tbl_MENU
+        WHERE
+        ORDERABLE_STATUS = 'Y'
+        ORDER BY
+            MENU_CODE
+    </select>
+
+    <select id="findAllCategory" resultMap="CategoryResultMap">
+        select
+            *
+        from
+            tbl_category
+        order by
+            CATEGORY_CODE
+    </select>
+
+</mapper>
+

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3>신규 메뉴 등록 폼🎁</h3>
+
+    <form action="/menu/regist" method="post">
+        <label>메뉴이름 : <input type="text" name="name"></label> <br>
+        <label>메뉴가격 : <input type="number" name="price" step="100" min="0"></label> <br>
+        <label>카테고리 코드 : </label>
+        <select name="categoryCode" id="categoryCode">
+
+        </select>
+        <br>
+        <label>판매상태 : </label>
+        <select name="orderableStatus" id="orderableStatus">
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+        </select>
+        <input type="submit" value="전송">
+    </form>
+
+    <script>
+        // 비동기 처리
+
+        // fetch : 강제로 잡아채다.
+
+        // json 형태의 문자열로 데이터 도착. 따라서 js 객체 형태로 변환이 필요하다.( then(res => res.json()) )
+        fetch("/menu/category")
+            .then(res => res.json()) // js 객체 형태로 변환
+            .then(data => {
+                const $categoryCode = document.getElementById("categoryCode");
+
+                console.log(data);
+
+                for (let index of data){
+                    const $option = document.createElement("option");
+                    $option.value = index.code;
+                    $option.textContent = index.name;
+                    $categoryCode.appendChild($option);
+                }
+            })
+    </script>
+</body>
+</html>
