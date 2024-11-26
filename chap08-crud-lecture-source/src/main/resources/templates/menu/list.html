@@ -8,24 +8,81 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>select 결과</h2>
+    <script>
+        const message = `[[${successMessage}]]`;
 
-    <table border="1">
-        <tr>
-            <th>code</th>
-            <th>name</th>
-            <th>price</th>
-            <th>category</th>
-            <th>orderable</th>
-        </tr>
-        <tr th:each="menu : ${menuList}" >
-            <td align="center" th:text="${menu.code}"></td>
-            <td style="padding: 0 10px" th:text="${menu.name}"></td>
-            <td style="padding: 0 10px" th:text="${menu.price}"></td>
-            <td th:text="${menu.categoryCode}" align="center"></td>
-            <td th:text="${menu.orderableStastus}" align="center"></td>
-        </tr>
-    </table>
+        if (message){
+            alert(message);
+        }
+    </script>
+
+    <form action="/menu/deleteMenus" method="post">
+        <table border="1">
+            <tr>
+                <th>check</th>
+                <th>code</th>
+                <th>name</th>
+                <th>price</th>
+                <th>category</th>
+                <th>orderable</th>
+            </tr>
+            <tr th:each="menu : ${menuList}" th:onclick="|location.href='@{/menu/detail(menuCode=${menu.code})}'|">
+                <td onclick="event.stopPropagation()"><input type="checkbox" name="checkCode" th:value="${menu.code}"/></td>
+                <td align="center" th:text="${menu.code}"></td>
+                <td style="padding: 0 10px" th:text="${menu.name}"></td>
+                <td style="padding: 0 10px" th:text="${menu.price}"></td>
+                <td th:text="${menu.categoryCode}" align="center"></td>
+                <td th:text="${menu.orderableStatus}" align="center"></td>
+            </tr>
+        </table>
+
+        <button style="margin-top: 10px;" type="button" id="deleteBtn">삭제하기</button>
+    </form>
+
+    <script>
+        const deleteMessage = `[[${deleteMessage}]]`;
+        const bodyDiv = document.querySelector("body");
+
+        console.log("message: ",deleteMessage);
+
+        if (deleteMessage){
+            const deleteMessageBox = document.createElement("h3")
+
+            deleteMessageBox.textContent = deleteMessage;
+            bodyDiv.appendChild(deleteMessageBox);
+        }
+    </script>
+
+    <script th:inline="javascript">
+        const deleteBtn = document.getElementById("deleteBtn");
+
+        deleteBtn.addEventListener("click",(event)=>{
+            const check = confirm("정말 삭제하시겠어요?");
+
+            if (check){
+                const form = document.querySelector("form");
+                form.submit();
+            } else{
+
+                // 모든 체크박스를 해제
+                const checkboxes = document.querySelectorAll("input[type='checkbox']");
+                checkboxes.forEach((checkbox) => {
+                    checkbox.checked = false; // 체크 상태 해제
+                });
+
+                // try {
+                //     const menuList = JSON.parse(`[[${menuList}]]`);
+                //     console.log("메뉴 목록:", menuList);
+                //
+                //     for (menu of menuList){
+                //
+                //     }
+                // } catch (error) {
+                //     console.error("menuList 파싱 실패:", error);
+                // }
+            }
+        })
+    </script>
 
 </body>
 </html>
